@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style_main.css">
+</head>
+<body>
+    <header>
+
+    </header>
+    <main id="main">
+        <form id="create_form" method="post" action="includes/create_room.php">
+            <label for="code">Назва комнати:</label>
+            <input type="text" id="code" name="code"><br><br>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <label for="text">Ник:</label>
+            <input type="text" id="name" name="name"><br><br>
+            <input type="submit" value="Создать">
+        </form>
+
+        <form if="enter_form" method="post" action="includes/enter_room.php">
+            <label for="code">Назва комнати:</label>
+            <input type="text" id="code" name="code"><br><br>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <label for="name">Ник:</label>
+            <input type="text" id="name" name="name"><br><br>
+            <input type="submit" value="Войти">
+        </form>
+    </main>
+</body>
+</html>
