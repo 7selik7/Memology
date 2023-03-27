@@ -50,7 +50,7 @@
 
     xhr.open("POST", "../includes/check_game_status.php");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    const params = "room_id=$room_id";
+    const params = "room_id=s0fl";
     xhr.send(params);
 
 

@@ -1,10 +1,9 @@
 <?php
 include('connect_db.php'); 
-$code = $_GET['code'];
-$room = $code;
+$room_id = $_GET['room_id'];
 
 // SQL запрос с условием WHERE по полю room
-$sql = "SELECT * FROM `rooms` WHERE room_name = '$room'";
+$sql = "SELECT * FROM `rooms` WHERE room_id = '$room_id'";
 $result = $connection->query($sql);
 
 // Формирование списка пользователей

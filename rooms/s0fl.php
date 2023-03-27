@@ -10,7 +10,7 @@
   $(document).ready(function(){
   setInterval(function(){
       $.ajax({
-           url: '../includes/get_user_list.php?room_id=<?php echo '$room_id'; ?>',
+           url: '../includes/get_user_list.php?room_id=<?php echo 's0fl'; ?>',
            success: function(response){
              $('#userList').html(response); 
          }
@@ -23,7 +23,7 @@
   <div>
     <div>
       <label for="">
-          <?php echo '$room_name'; ?>
+          <?php echo 'room7'; ?>
       </label>
     </div>
     <div id="userList">
@@ -39,9 +39,9 @@
       var xhr = new XMLHttpRequest();
       xhr.open('POST', '../includes/update_game_status.php', true);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      var data = "game_status=1&room_id=<?php echo '$room_id'?>";
+      var data = "game_status=1&room_id=<?php echo 's0fl'?>";
       xhr.send(data);
-      window.location.href = '../games/game_$room_id.php';
+      window.location.href = '../games/game_s0fl.php';
 
   });
   </script>
