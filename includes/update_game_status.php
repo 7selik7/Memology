@@ -4,8 +4,11 @@ include('../includes/connect_db.php');
 // Обработка запроса
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $game_status = $_POST['game_status'];
-  $code = $_POST["code"];
-  $sql = "UPDATE `rooms` SET game_status='$game_status' WHERE `room_name` = '$code'";
+  $room_id = $_POST["room_id"];
+  $sql = "UPDATE `rooms` SET game_status='$game_status' WHERE `room_id` = '$room_id'";
   mysqli_query($connection, $sql);
+  $sql = "UPDATE `games` SET start_time = NOW() WHERE `room_id` = '$room_id'";
+  mysqli_query($connection, $sql);
+
 }
 ?>
