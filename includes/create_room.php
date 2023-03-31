@@ -47,6 +47,8 @@ if (mysqli_num_rows($result) > 0) {
     $content = str_replace('$room_id', $room_id, $content);
     file_put_contents($filename, $content);
     header('Location: ' . $filename);
+    session_start();
+    $_SESSION['authenticated'] = true;
 
     $connection->close();
     exit;

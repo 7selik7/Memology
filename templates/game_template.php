@@ -1,3 +1,11 @@
+<!-- Наступний скрипт перевіряє чи ввів користувач пароль чи просто вів адресу -->
+<?php
+session_start();
+if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
+    header('Location: ../index.php');
+    exit();
+}?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +34,7 @@
                 <?php 
                   for ($i = 0; $i < 3; $i++){
                     shuffle($images);
-                    echo '<button><img src="' . $images[0] . '" width="300" height="180"></button>';
+                    echo "<button class='image-button'><img src='$images[0]' width='300' height='180'></button>";
                     unset($images[0]);
                   }?>
             </div>
@@ -34,7 +42,7 @@
               <?php 
                 for ($i = 0; $i < 3; $i++){
                   shuffle($images);
-                  echo '<button><img src="' . $images[0] . '" width="300" height="180"></button>';
+                  echo "<button class='image-button'><img src='$images[0]' width='300' height='180'></button>";
                   unset($images[0]);
                }?>
             </div>
@@ -44,7 +52,8 @@
         </div>
     </div>
 <script>
-  let start_time = ''
+  let start_time = '';
+  let room_id = '$room_id';
   function checkGameStatus() {
     const xhr = new XMLHttpRequest();
 
