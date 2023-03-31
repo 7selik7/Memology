@@ -6,7 +6,6 @@ include('../includes/connect_db.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Получаем значения, отправленные через метод POST
   $room_name = $_POST['room_name'];
-  echo $room_name;
   $password = $_POST['password'];
   $nickname = $_POST['nickname'];
 }
@@ -49,6 +48,7 @@ if (mysqli_num_rows($result) > 0) {
     header('Location: ' . $filename);
     session_start();
     $_SESSION['authenticated'] = true;
+    $_SESSION['user_num'] = 1;
 
     $connection->close();
     exit;

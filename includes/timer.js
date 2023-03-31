@@ -1,11 +1,4 @@
-let time = 60;
-let answer = 0;
-const timer = document.getElementById("timer");
-
-
-setInterval(updateTimer, 500);
-
-function updateTimer() {
+function updateTimer(time, start_time){
     const now = new Date();
 
     const hours = now.getHours().toString().padStart(2, '0');
@@ -20,8 +13,16 @@ function updateTimer() {
     const diffInMilliseconds = date2.getTime() - date1.getTime();
     const diffInSeconds = diffInMilliseconds / 1000;
 
-    answer = time - diffInSeconds;
-
+    let answer = time - diffInSeconds;
+    if(answer < 0){
+        answer = 0;
+    }
     timer.innerHTML = `${answer}`;
+
+    return answer;
 }
+
+
+
+
 

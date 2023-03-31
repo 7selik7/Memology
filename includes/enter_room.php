@@ -40,6 +40,20 @@ if ($result->num_rows > 0) {
     WHERE `room_name` = '$room_name'";
     mysqli_query($connection, $sql);
 
+    //Цей запрос потрібен для того щоб визначити, який номер присвоється користувачю який додається до кімнати
+    $sql = "SELECT 
+              CASE 
+                WHEN user4 = '$nickname' THEN 4
+                WHEN user3 = '$nickname' THEN 3
+                WHEN user2 = '$nickname' THEN 2
+              END AS user_num
+              FROM `rooms` 
+              WHERE `room_name` = '$room_name'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['user_num'] = $row['user_num'];
+
+    //Цей скрипт отримує room_id для того, щоб запустити сторінку гри
     $sql = "SELECT room_id FROM `rooms` WHERE room_name = '$room_name'";
     $result = mysqli_query($connection, $sql);
     $row = mysqli_fetch_assoc(mysqli_query($connection, $sql));

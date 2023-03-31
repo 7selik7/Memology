@@ -21,68 +21,47 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
     $image_path = sprintf('../images/image%d.jpg', $i);
     $images[] = $image_path;
   }?>
-<!-- Этот блок высветиться игрокам которые зайдут в комнату и будут ждать пока админ (тот кто создал комнату) запустит игру. Тоесть тут просто 
-можно сделать просто надпись на фоне "ожидайте начало игры, также можно добавить какой интенрактив типо крутящегося колечка например"-->
-<div id='game_waiting'>
-  <h1>Очікуйте коли гра почнеться</h1>
-</div>
-<!-- Дальше идет блок body этот блок появиться у всех пользователей и у админа в том числе, тоесть тут уже должен быть отрисован сам процес игры--> 
+
+
 <body>
-    <div id="alona">
-        <div id="image_block">
-            <div class="rows">
-                <?php 
-                  for ($i = 0; $i < 3; $i++){
-                    shuffle($images);
-                    echo "<button class='image-button'><img src='$images[0]' width='300' height='180'></button>";
-                    unset($images[0]);
-                  }?>
-            </div>
-            <div class="rows">
-              <?php 
-                for ($i = 0; $i < 3; $i++){
-                  shuffle($images);
-                  echo "<button class='image-button'><img src='$images[0]' width='300' height='180'></button>";
-                  unset($images[0]);
-               }?>
-            </div>
-        </div>
-        <div id="timer_block">
-            <h1 id='timer'></h1>
-        </div>
-    </div>
+  <!-- Этот блок высветиться игрокам которые зайдут в комнату и будут ждать пока админ (тот кто создал комнату) запустит игру. Тоесть тут просто 
+  можно сделать просто надпись на фоне "ожидайте начало игры, также можно добавить какой интенрактив типо крутящегося колечка например"-->
+  <div id='game_waiting'>
+    <h1>Очікуйте коли гра почнеться</h1>
+  </div>
+    <!-- Дальше идет блок body этот блок появиться у всех пользователей и у админа в том числе, тоесть тут уже должен быть отрисован сам процес игры--> 
+  <div id="main">
+      <div id="image_block">
+
+          <div id="theme_block"> 
+              <h1>На концерте Лил пипа</h1>
+          </div>
+
+          <div class="rows">
+              <?php for ($i = 0; $i < 3; $i++){
+                shuffle($images);
+                echo "<button class='image_button'><img src='$images[0]' width='300' height='180'></button>";
+                unset($images[0]);}?>
+          </div>
+          <div class="rows">
+            <?php for ($i = 0; $i < 3; $i++){
+                shuffle($images);
+                echo "<button class='image_button'><img src='$images[0]' width='300' height='180'></button>";
+                unset($images[0]);}?>
+          </div>
+      </div>
+      <div id="result_block"></div>
+      <div id="timer_block"> <h1 id='timer'></h1> </div>
+  </div>
+
 <script>
   let start_time = '';
   let room_id = '$room_id';
-  function checkGameStatus() {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open("POST", "../includes/check_game_status.php");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    const params = "room_id=$room_id";
-    xhr.send(params);
-
-
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const response = xhr.responseText;
-
-        const responseData = JSON.parse(response);
-        const gameStatus = responseData.game_status;
-        start_time = responseData.start_time;
-
-        if (gameStatus === '1') {
-          document.getElementById("alona").style.display = "flex";
-          document.getElementById("game_waiting").style.display = "none";
-          return;
-        } else {
-          setTimeout(checkGameStatus, 1000);
-        }
-      }
-    };
-  }
-  checkGameStatus();
+  const params = "room_id=$room_id";
 </script>
+
+<script src="../includes/game.js"></script>
 <script src="../includes/timer.js"></script>
+
 </body>
 </html>
