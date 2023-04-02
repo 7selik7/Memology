@@ -32,7 +32,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
     <!-- Дальше идет блок body этот блок появиться у всех пользователей и у админа в том числе, тоесть тут уже должен быть отрисован сам процес игры--> 
   <div id="main">
       <div id="image_block">
-
           <div id="theme_block"> 
               <h1>На концерте Лил пипа</h1>
           </div>

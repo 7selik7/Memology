@@ -1,5 +1,5 @@
 #main{
-    display: none;
+    display: flex;
     text-align: center;
     justify-content: center;
 }
@@ -7,6 +7,21 @@
 #game_waiting{
     display: block;
 }
+
+#image_block{
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    width: 1000px;
+    height: 700px;
+}
+#result_block{
+    display: none;
+}
+#timer_block{
+    display: none;
+}
+
 .rows{
     display: flex;
     justify-content: space-around;
@@ -14,10 +29,3 @@
     width: 100%;
 }
 
-#image_block{
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    width: 1000px;
-    height: 700px;
-}
