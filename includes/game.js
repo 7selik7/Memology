@@ -22,6 +22,17 @@
 
 */
 //Функция которя добовляет к начальному времени 
+function updateTheme(){
+    $.ajax({
+        url: '../includes/get_theme.php',
+        data: {room_id: room_id},
+        success: function(response){
+          $('.theme').html(response); 
+        }
+    });
+}
+
+
 function addSecondsToTime(start_time, secondsToAdd) {
     const cont_time = start_time.split(':'); 
     let hours = parseInt(cont_time[0]);
@@ -65,6 +76,7 @@ function checkGameStatus() {
         start_time = responseData.start_time;
 
         if (gameStatus === '1') {
+            updateTheme();
             waitBlock.style.display = "none";
             imageBlock.style.display = "flex";
             timerBlock.style.display = 'flex';
