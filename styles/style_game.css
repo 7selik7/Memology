@@ -1,23 +1,30 @@
 #main{
-    display: none;
-    text-align: center;
-    justify-content: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 #game_waiting{
-    display: block;
-}
-.rows{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    width: 100%;
+  display: block;
 }
 
 #image_block{
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    width: 1000px;
-    height: 700px;
+  display: none;
+  text-align: center;
+  flex-direction: column;
+  width: 1000px;
+  height: 700px;
+}
+#result_block{
+  display: none;
+}
+#timer_block{
+  display: none;
+}
+
+.rows{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
 }
