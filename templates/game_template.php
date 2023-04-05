@@ -35,6 +35,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
   ?>
 
 
+
 <body>
   <!-- Этот блок высветиться игрокам которые зайдут в комнату и будут ждать пока админ (тот кто создал комнату) запустит игру. Тоесть тут просто 
   можно сделать просто надпись на фоне "ожидайте начало игры, также можно добавить какой интенрактив типо крутящегося колечка например"-->
@@ -64,6 +65,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       <div id="result_block">
         <h1 class="theme"></h1>
       </div>
+
       <div id="timer_block"> <h1 id='timer'></h1> </div>
   </div>
 
