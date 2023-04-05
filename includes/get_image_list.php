@@ -9,6 +9,11 @@ $images = array();
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
   $images = array_values($row);
+  
+  session_start();
+  $_SESSION['image_info'] = $images;
+  // удаление элемента массива по индексу
+  unset($images[$_SESSION['user_num'] - 1]);
 }
 
 echo json_encode($images);
