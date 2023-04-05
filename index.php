@@ -26,7 +26,7 @@
                     <input type="password" id="password" name="password" placeholder="Пароль">
                     <input type="text" id="name" name="nickname" placeholder="Ім'я">
                 </div>
-                <input type="submit" class="button-create" value="Створити">
+                <button type="submit" class="button-create">СТВОРИТИ</button>
             </form>
 
             <form if="enter_form" class="create_form" method="post" action="includes/enter_room.php">
@@ -35,7 +35,7 @@
                     <input type="password" class="code" id="password" name="password" placeholder="Пароль">
                     <input type="text" class="code" id="name" name="nickname" placeholder="Ім'я">
                 </div>
-                <input type="submit" class="button-enter" value="ВВІЙТИ">
+                <button type="submit" class="button-enter">ВВІЙТИ</button>
             </form>
         </div>
     </div>
