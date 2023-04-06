@@ -12,7 +12,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../styles/style_game.css">
+  <link rel="stylesheet" href="../styles/style_menu.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
   $(document).ready(function(){
@@ -20,12 +20,14 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       $.ajax({
            url: '../includes/get_user_list.php?room_id=<?php echo '$room_id'; ?>',
            success: function(response){
-             $('#userList').html(response); 
+             $('.username').each(function(index) {
+               $(this).text(response[index]);
+             });
          }
     });
   }, 2000);
   }); 
-  </script>
+</script>
 </head>
 
 <style>
@@ -43,7 +45,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         <div class="user">
           <div class="userbg">
             <div class="username" for="">
-              Альона
             </div>
           </div>
           <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
@@ -52,7 +53,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         <div class="user">
           <div class="userbg">
             <div class="username" for="">
-              Стас
             </div>
           </div>
           <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
@@ -61,7 +61,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         <div class="user">
           <div class="userbg">
             <div class="username" for="">
-              Женя
             </div>
           </div>
           <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
@@ -70,7 +69,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         <div class="user">
           <div class="userbg">
             <div class="username" for="">
-              Степа
             </div>
           </div>
           <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
@@ -83,7 +81,12 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             ЗАПРОСИТИ
           </button>
         </div>
-        <div class="border"><button id='start_game_button'>ЗАПУСТИТИ ГРУ</button></div>
+        <div class="border">
+          <button id='start_game_button'>
+            ЗАПУСТИТИ ГРУ
+          </button>
+        </div>
+
       </div>
     </div>  
 

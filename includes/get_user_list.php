@@ -3,20 +3,16 @@ include('connect_db.php');
 $room_id = $_GET['room_id'];
 
 // SQL запрос с условием WHERE по полю room
-$sql = "SELECT * FROM `rooms` WHERE room_id = '$room_id'";
-$result = $connection->query($sql);
+$sql = "SELECT `user1`, `user2`, `user3`, `user4` FROM `rooms` WHERE `room_id` = '$room_id'";
+$result = mysqli_query($connection, $sql);
 
 // Формирование списка пользователей
-$userList = "<ul>";
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $userList .= "<li>".$row["user1"]."</li>";
-        $userList .= "<li>".$row["user2"]."</li>";
-        $userList .= "<li>".$row["user3"]."</li>";
-        $userList .= "<li>".$row["user4"]."</li>";
-    }
-} 
-$userList .= "</ul>";
-echo $userList;
+$row = mysqli_fetch_assoc($result);
+$user_list = array($row['user1'], $row['user2'], $row['user3'], $row['user4']);
+$json = json_encode($user_list);
+
+// отправка ответа клиенту
+header('Content-Type: application/json');
+echo $json;
 $connection->close();
 ?>
