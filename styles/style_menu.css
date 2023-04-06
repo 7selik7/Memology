@@ -94,13 +94,14 @@
   .userbg {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     padding: 1.7vh 3.2vh;
     background-color: var(--white-smoke);
     border-radius: 6.3vh;
     box-shadow: inset rgba(0,0,0,0.1) 0px 0.5vh 1.3vh 0px;
     margin-right: 3.8vh;
     width: 65vh;
+    height: 6.7vh;
   }
   .username {
     color: var(--black);
