@@ -23,6 +23,7 @@ include('../includes/connect_db.php');
     $new_index = array_rand($available_indexes);
     $_SESSION['user_image_indexes'][] = $new_index;
 
+    print_r($_SESSION['user_image_indexes']);
     $sql = "UPDATE `games` SET `$image_num` = '$image_id' WHERE `room_id` = '$room_id'";
     mysqli_query($connection, $sql);
 }

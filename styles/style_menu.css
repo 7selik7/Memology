@@ -1,160 +1,159 @@
 /* This is the project stylesheet */
 
 :root {
-    /* Colors */
-    --black: rgba(0, 0, 0, 1);
-    --transparent-black: rgba(0, 0, 0, 0.4);
-    --transparent-black-2: rgba(0, 0, 0, 0.1);
-    --tomato: rgba(240, 68, 56, 1);
-    --white: rgba(255, 255, 255, 1);
-    --white-smoke: rgba(242, 242, 242, 1);
+  /* Colors */
+  --black: rgba(0, 0, 0, 1);
+  --transparent-black: rgba(0, 0, 0, 0.4);
+  --transparent-black-2: rgba(0, 0, 0, 0.1);
+  --tomato: rgba(240, 68, 56, 1);
+  --white: rgba(255, 255, 255, 1);
+  --white-smoke: rgba(242, 242, 242, 1);
+
+  /* Typographies */
+  /* montserrat-40-regular */
+  --montserrat-40-regular-family: "Montserrat";
+  --montserrat-40-regular-size: 5vh;
+  --montserrat-40-regular-weight: 500;
+  --montserrat-40-regular-line-height: normal;
   
-    /* Typographies */
-    /* montserrat-40-regular */
-    --montserrat-40-regular-family: "Montserrat";
-    --montserrat-40-regular-size: 5vh;
-    --montserrat-40-regular-weight: 500;
-    --montserrat-40-regular-line-height: normal;
-    
-    /* montserrat-20-regular */
-    --montserrat-20-regular-family: "Montserrat";
-    --montserrat-20-regular-size: 2.8vh;
-    --montserrat-20-regular-weight: 400;
-    --montserrat-20-regular-line-height: normal;
-  
-    /* montserrat-20-semi-bold */
-    --montserrat-20-semi-bold-family: "Montserrat";
-    --montserrat-20-semi-bold-size: 2.8vh;
-    --montserrat-20-semi-bold-weight: 600;
-    --montserrat-20-semi-bold-line-height: normal;
-  }
-  body {
-      height: 100vh;
-      margin: 0vh;
-      background-size: cover;
-      background: url("../images/project_images/bg1.png");
-      background-size: 100% 100%;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  
-    }
-  .main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-  .cross {
-    width: 7vh;
-    height: 7vh;
-    padding-top: 0.5vh;
-  }
-  .room_name {
-    color: var(--black);
-    font-family: var(--montserrat-40-regular-family);
-    font-size: var(--montserrat-40-regular-size);
-    font-weight: var(--montserrat-40-regular-weight);
-    line-height: var(--montserrat-40-regular-line-height);
-    text-shadow: 0 0.5vh 1.3vh rgba(0, 0, 0, 0.2);
-    margin-bottom: 4.8vh;
-  }
-  .room {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 7vh;
-    background-color: var(--white);
-    box-shadow: 0 0.5vh 1.3vh 0  rgba(0, 0, 0, 0.4);
-    border-radius: 5vh;
-  }
-  .frame1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .users {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.3vh;
-  }
-  .user {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center; 
-    margin-bottom: 3.8vh;
-    align-self: stretch;
-  }
-  .userbg {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 1.7vh 3.2vh;
-    background-color: var(--white-smoke);
-    border-radius: 6.3vh;
-    box-shadow: inset rgba(0,0,0,0.1) 0px 0.5vh 1.3vh 0px;
-    margin-right: 3.8vh;
-    width: 65vh;
-    height: 6.7vh;
-  }
-  .username {
-    color: var(--black);
-    font-family: var(--montserrat-20-regular-family);
-    font-size: var(--montserrat-20-regular-size);
-    font-weight: var(--montserrat-20-regular-weight);
-    line-height: var(--montserrat-20-regular-line-height);
-  }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 3.8vh;
-    margin-top: 1vh;
-  }
-  button {
-    background-image: url("../images/project_images/button_bg.svg");
-    background-color: var(--tomato);
+  /* montserrat-20-regular */
+  --montserrat-20-regular-family: "Montserrat";
+  --montserrat-20-regular-size: 2.8vh;
+  --montserrat-20-regular-weight: 400;
+  --montserrat-20-regular-line-height: normal;
+
+  /* montserrat-20-semi-bold */
+  --montserrat-20-semi-bold-family: "Montserrat";
+  --montserrat-20-semi-bold-size: 2.8vh;
+  --montserrat-20-semi-bold-weight: 600;
+  --montserrat-20-semi-bold-line-height: normal;
+}
+body {
+    height: 100vh;
+    margin: 0vh;
+    background-size: cover;
+    background: url("../images/project_images/bg1.png");
     background-size: 100% 100%;
-    box-shadow: 0 0.5vh 1.3vh 0 rgba(0, 0, 0, 0.25);
+    background-position: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    border: 0px solid;
-    border-radius: 6.3vh;
-    width: 39vh;
-    height: 6.2vh;
-    color: var(--white);
-    text-align: center;
-    text-transform: uppercase;
-    font-family: var(--montserrat-20-semi-bold-family);
-    font-size: var(--montserrat-20-semi-bold-size);
-    font-weight: var(--montserrat-20-semi-bold-weight);
-    line-height: var(--montserrat-20-semi-bold-line-height);
+
   }
-  
-  button:hover {
-    background-color: rgb(239, 163, 158);
-    box-shadow: 0 0.5vh 1.3vh 0 rgba(0, 0, 0, 0.25);
+.main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-direction: row;
-    border-radius: 6.3vh;
-    width: 39vh;
-    height: 6.2vh;
-    color: var(--white);
-    text-align: center;
-    text-transform: uppercase;
-    font-family: var(--montserrat-20-semi-bold-family);
-    font-size: var(--montserrat-20-semi-bold-size);
-    font-weight: var(--montserrat-20-semi-bold-weight);
-    line-height: var(--montserrat-20-semi-bold-line-height);
-  }
-  
+}
+.cross {
+  width: 7vh;
+  height: 7vh;
+  padding-top: 0.5vh;
+}
+.room_name {
+  color: var(--black);
+  font-family: var(--montserrat-40-regular-family);
+  font-size: var(--montserrat-40-regular-size);
+  font-weight: var(--montserrat-40-regular-weight);
+  line-height: var(--montserrat-40-regular-line-height);
+  text-shadow: 0 0.5vh 1.3vh rgba(0, 0, 0, 0.2);
+  margin-bottom: 4.8vh;
+}
+.room {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 7vh;
+  background-color: var(--white);
+  box-shadow: 0 0.5vh 1.3vh 0  rgba(0, 0, 0, 0.4);
+  border-radius: 5vh;
+}
+.frame1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.3vh;
+}
+.user {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  margin-bottom: 3.8vh;
+  align-self: stretch;
+}
+.userbg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1.7vh 3.2vh;
+  background-color: var(--white-smoke);
+  border-radius: 6.3vh;
+  box-shadow: inset rgba(0,0,0,0.1) 0px 0.5vh 1.3vh 0px;
+  margin-right: 3.8vh;
+  width: 65vh;
+  height: 6.7vh;
+}
+.username {
+  color: var(--black);
+  font-family: var(--montserrat-20-regular-family);
+  font-size: var(--montserrat-20-regular-size);
+  font-weight: var(--montserrat-20-regular-weight);
+  line-height: var(--montserrat-20-regular-line-height);
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 3.8vh;
+  margin-top: 1vh;
+}
+button {
+  background-image: url("../images/project_images/button_bg.svg");
+  background-color: var(--tomato);
+  background-size: 100% 100%;
+  box-shadow: 0 0.5vh 1.3vh 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border: 0px solid;
+  border-radius: 6.3vh;
+  width: 39vh;
+  height: 6.2vh;
+  color: var(--white);
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--montserrat-20-semi-bold-family);
+  font-size: var(--montserrat-20-semi-bold-size);
+  font-weight: var(--montserrat-20-semi-bold-weight);
+  line-height: var(--montserrat-20-semi-bold-line-height);
+}
+
+button:hover {
+  background-color: rgb(239, 163, 158);
+  box-shadow: 0 0.5vh 1.3vh 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 6.3vh;
+  width: 39vh;
+  height: 6.2vh;
+  color: var(--white);
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--montserrat-20-semi-bold-family);
+  font-size: var(--montserrat-20-semi-bold-size);
+  font-weight: var(--montserrat-20-semi-bold-weight);
+  line-height: var(--montserrat-20-semi-bold-line-height);
+}

@@ -86,7 +86,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             ЗАПУСТИТИ ГРУ
           </button>
         </div>
-
       </div>
     </div>  
 
