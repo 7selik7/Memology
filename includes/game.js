@@ -1,12 +1,33 @@
-function updateTheme(){
+function updateTheme(current_round){
     $.ajax({
         url: '../includes/get_theme.php',
-        data: {room_id: room_id},
+        data: {room_id: room_id, current_round: current_round},
         success: function(response){
           $('.theme').html(response); 
         }
     });
 }
+
+function updateImages(){
+    $(document).ready(function() {
+        let image_list = [];
+        if (localStorage.getItem("images_list")) {
+            image_list = JSON.parse(localStorage.getItem("images_list"));
+        } else {
+            image_list = [];
+            while (image_list.length < 6) {
+                let random_number = Math.floor(Math.random() * 24) + 1;
+                if (image_list.indexOf(random_number) === -1) {
+                    image_list.push(random_number);
+                }
+            }
+            localStorage.setItem("images_list", JSON.stringify(image_list));
+        }
+        $(".image_button img").each(function(index, element) {
+          $(element).attr("src", `../images/image${image_list[index]}.jpg`);
+        });
+    });
+} 
 
 function addSecondsToTime(start_time, secondsToAdd) {
     const cont_time = start_time.split(':'); 
@@ -42,20 +63,33 @@ function checkGameStatus() {
         const responseData = JSON.parse(response);
         const gameStatus = responseData.game_status;
         start_time = responseData.start_time;
+                if (gameStatus === '1') {
+                    let now = new Date();
+                    let hours = now.getHours().toString().padStart(2, '0');
+                    let minutes = now.getMinutes().toString().padStart(2, '0');
+                    let seconds = now.getSeconds().toString().padStart(2, '0');
+                    let now_time = `${hours}:${minutes}:${seconds}`;
+                    let date1 = new Date('1970-01-01T' + start_time + 'Z');
+                    let date2 = new Date('1970-01-01T' + now_time + 'Z');
+            
+                    const diff_seconds = (date2.getTime() - date1.getTime()) / 1000;
+                    const num_of_50_sec_intervals = Math.floor(diff_seconds / 50);
+                    round = num_of_50_sec_intervals;
+                    start_time = addSecondsToTime(start_time, 50 * round);
 
-        if (gameStatus === '1') {
-            updateTheme();
-            waitBlock.style.display = "none";
-            imageBlock.style.display = "flex";
-            timerBlock.style.display = 'flex';
-            first_stage();
-        } else {
-            setTimeout(checkGameStatus, 1000);
-        }
+                    first_stage();
+                } else {
+                    setTimeout(checkGameStatus, 1000);
+                }
     }};
 }
 
 function first_stage(){
+    updateImages();
+    updateTheme(round);
+    waitBlock.style.display = "none";
+    imageBlock.style.display = "flex";
+    timerBlock.style.display = 'flex';
     let saved_img_display_value = localStorage.getItem("image_block_display");
     let result_block_display_value = localStorage.getItem("result_block_display");
     if (saved_img_display_value) {
@@ -64,26 +98,6 @@ function first_stage(){
     if (result_block_display_value) {
         resultBlock.style.display = result_block_display_value;
     }
-
-    imageButtons.forEach(button => {
-        button.addEventListener('click', event => {
-            const buttonElement = event.currentTarget;
-            const imageElement = buttonElement.querySelector('img');
-            const imageSrc = imageElement.getAttribute('src');
-            const imageName = imageSrc.split('/').pop();
-            let imageNumber = imageName.match(/\d+/)[0];
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '../includes/push_image.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            var data = 'room_id=' + encodeURIComponent(room_id) + '&image_id=' + encodeURIComponent(imageNumber);
-            xhr.send(data);
-
-            imageBlock.style.display = "none";
-            localStorage.setItem("image_block_display", imageBlock.style.display);
-            
-        });
-    });
 
     let timer_func = setInterval(function() {
         let answer = updateTimer(30, start_time);
@@ -125,21 +139,13 @@ function second_stage(){
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const images = JSON.parse(xhr.responseText);
-            const buttons = [];
-            const resultBlock = document.getElementById('result_block');
-            for (let i = 0; i < 4; i++) {
-                if (!images.hasOwnProperty(i)) {
-                    continue;
-                }
-                const imgSrc = `../images/image${images[i]}.jpg`;
-                const btn = document.createElement('button');
-                btn.className = 'vote_image';
-                btn.innerHTML = `<img src="${imgSrc}" width="300" height="180">`;
-                buttons.push(btn);
-            }
-            buttons.sort(() => Math.random() - 0.5);
-            for (let i = 0; i < 3; i++) {
-                resultBlock.appendChild(buttons[i]);
+            const imageButtons = document.querySelectorAll('.vote_image');
+            const imageIndexes = Object.keys(images).sort((a, b) => a - b); 
+            for (let i = 0; i < imageIndexes.length; i++) {
+                const index = imageIndexes[i];
+                const image = images[index].toString();
+                const imgElement = imageButtons[i].querySelector('img');
+                imgElement.src = `../images/image${image}.jpg`;
             }
             let result_block_display_value = localStorage.getItem("result_block_display");
             if (result_block_display_value) {
@@ -149,31 +155,7 @@ function second_stage(){
             }
         };
     }
-
-    const resultBlock = document.getElementById('result_block');
-    resultBlock.addEventListener('click', event => {
-    const buttonElement = event.target.closest('.vote_image');
-    if (buttonElement) {
-        const imageElement = buttonElement.querySelector('img');
-        const imageSrc = imageElement.getAttribute('src');
-        const imageName = imageSrc.split('/').pop();
-        let imageNumber = imageName.match(/\d+/)[0];
-        console.log(imageNumber);
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../includes/push_points.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        var data = 'room_id=' + encodeURIComponent(room_id) + '&image_id=' + encodeURIComponent(imageNumber);
-        xhr.send(data);
-        
-        resultBlock.style.display = "none";
-        localStorage.setItem("result_block_display", resultBlock.style.display);
-        
-    
-    }
-    });
 };
-
 
 function third_stage(){
     var xhr = new XMLHttpRequest();
@@ -184,18 +166,9 @@ function third_stage(){
 
     imageBlock.style.display = "flex";
     localStorage.setItem("image_block_display", imageBlock.style.display);
-    i = i + 1;
+    round = round + 1;
     imageBlock.style.display = "flex";
-
-    const resultBlock = document.getElementById('result_block');
-    const voteImages = resultBlock.querySelectorAll('.vote_image');
-
-    for (let i = 0; i < voteImages.length; i++) {
-        resultBlock.removeChild(voteImages[i]);
-    }
-
-    first_stage();
-    start_time = addSecondsToTime(start_time, 20);
+    check_round(round);
 };
 
 function final_stage(){
@@ -213,18 +186,20 @@ function final_stage(){
     return;
 }
 
-function check_round(){
-    if (i >= 3){
+function check_round(round){
+    if (round > 3){
         final_stage();
+        return false;
     }
     else {
-        start_time = addSecondsToTime(start_time, 50 * i);
-        checkGameStatus();
-    }
-    return;
+        start_time = addSecondsToTime(start_time, 20);
+        first_stage();
+        return true;
+    } 
 }
-
 const imageButtons = document.querySelectorAll('.image_button');
+const voteButtons = document.querySelectorAll('.vote_image');
+
 const imageBlock = document.getElementById('image_block');
 const resultBlock = document.getElementById('result_block');
 const timerBlock = document.getElementById('timer_block');
@@ -232,15 +207,67 @@ const waitBlock = document.getElementById('game_waiting');
 const finalBlock = document.getElementById('final_block');
 const timer = document.getElementById("timer");
 
-let now = new Date();
-let hours = now.getHours().toString().padStart(2, '0');
-let minutes = now.getMinutes().toString().padStart(2, '0');
-let seconds = now.getSeconds().toString().padStart(2, '0');
-let now_time = `${hours}:${minutes}:${seconds}`;
-let date1 = new Date('1970-01-01T' + start_time + 'Z');
-let date2 = new Date('1970-01-01T' + now_time + 'Z');
+imageButtons.forEach(button => {
+    button.addEventListener('click', event => {
+        const buttonElement = event.currentTarget;
+        const imageElement = buttonElement.querySelector('img');
+        const imageSrc = imageElement.getAttribute('src');
+        const imageName = imageSrc.split('/').pop();
+        let imageNumber = imageName.match(/\d+/)[0];
+        
+        //Обновит список картинок после нажатия кнопки
+        let image_list = JSON.parse(localStorage.getItem('images_list'));
+        intImageNum = parseInt(imageNumber);
+        randomNum = Math.floor(Math.random() * 24) + 1;
+        while (image_list.indexOf(randomNum) !== -1) {
+            randomNum = Math.floor(Math.random() * 24) + 1;
+        }
+        index = image_list.indexOf(intImageNum);
+        image_list.splice(index, 1, randomNum);
+        localStorage.setItem("images_list", JSON.stringify(image_list));
+         
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../includes/push_image.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        var data = 'room_id=' + encodeURIComponent(room_id) + '&image_id=' + encodeURIComponent(imageNumber);
+        xhr.send(data);
 
-const diff_seconds = (date2.getTime() - date1.getTime()) / 1000;
-const num_of_50_sec_intervals = Math.floor(diff_seconds / 50);
-i = num_of_50_sec_intervals;
-check_round();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let result = xhr.responseText;
+                if (result == 'false'){
+                    // Тут надо реализовать какой то код который будет выдавать норм ошибку
+                    alert("Таку картинку вже обрали");
+                }
+                else{
+                    imageBlock.style.display = "none";
+                    localStorage.setItem("image_block_display", imageBlock.style.display);
+                }
+            };
+        }
+
+        
+        
+    });
+});
+
+voteButtons.forEach(button => {
+    button.addEventListener('click', event => {
+        const buttonElement = event.currentTarget;
+        const imageElement = buttonElement.querySelector('img');
+        const imageSrc = imageElement.getAttribute('src');
+        const imageName = imageSrc.split('/').pop();
+        let imageNumber = imageName.match(/\d+/)[0];
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../includes/push_points.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        var data = 'room_id=' + encodeURIComponent(room_id) + '&image_id=' + encodeURIComponent(imageNumber);
+        xhr.send(data);
+        
+        resultBlock.style.display = "none";
+        localStorage.setItem("result_block_display", resultBlock.style.display);
+    });
+});
+
+checkGameStatus();
