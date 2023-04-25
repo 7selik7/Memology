@@ -44,34 +44,30 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       <div class="users">
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <button class='cross-btn' data-id="0"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <button class='cross-btn' data-id="1"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <button class='cross-btn' data-id="2"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <button class='cross-btn' data-id="3"></button>
         </div>
       </div>  
         
@@ -86,7 +82,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             ЗАПУСТИТИ ГРУ
           </button>
         </div>
-
       </div>
     </div>  
 
@@ -98,6 +93,18 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         var data = "game_status=1&room_id=<?php echo '$room_id'?>";
         xhr.send(data);
         window.location.href = '../games/game_$room_id.php';
+      });
+
+      let kickButtons = document.querySelectorAll('.cross-btn');
+      kickButtons.forEach(button => {
+        button.addEventListener('click', event => {
+          console.log(button.dataset.id);
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '../includes/delete_user.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          var data = "room_id=<?php echo '$room_id'?>&index=" + button.dataset.id;
+          xhr.send(data);
+        });
       });
     </script>
   </div>
