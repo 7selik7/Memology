@@ -60,6 +60,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
           <div class="userbg">
             <div class="username" for=""></div>
           </div>
+
           <button class='cross-btn' data-id="2"></button>
         </div>
 

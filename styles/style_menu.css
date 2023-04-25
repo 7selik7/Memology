@@ -46,7 +46,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 .room_name {
   color: var(--black);
   font-family: var(--montserrat-40-regular-family);
@@ -174,3 +173,4 @@ button:hover {
   height: 7vh;
   padding-top: 0.5vh;
 }
+
