@@ -46,13 +46,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
           <div class="userbg">
             <div class="username" for=""></div>
           </div>
-          <button class='cross-btn' data-id="0"></button>
-        </div>
-
-        <div class="user">
-          <div class="userbg">
-            <div class="username" for=""></div>
-          </div>
           <button class='cross-btn' data-id="1"></button>
         </div>
 
@@ -60,7 +53,6 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
           <div class="userbg">
             <div class="username" for=""></div>
           </div>
-
           <button class='cross-btn' data-id="2"></button>
         </div>
 
@@ -68,7 +60,15 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
           <div class="userbg">
             <div class="username" for=""></div>
           </div>
+
           <button class='cross-btn' data-id="3"></button>
+        </div>
+
+        <div class="user">
+          <div class="userbg">
+            <div class="username" for=""></div>
+          </div>
+          <button class='cross-btn' data-id="4"></button>
         </div>
       </div>  
         
@@ -99,12 +99,20 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       let kickButtons = document.querySelectorAll('.cross-btn');
       kickButtons.forEach(button => {
         button.addEventListener('click', event => {
-          console.log(button.dataset.id);
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', '../includes/delete_user.php', true);
-          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          var data = "room_id=<?php echo '$room_id'?>&index=" + button.dataset.id;
-          xhr.send(data);
+          if (button.dataset.id == 1){
+            var sound = new Audio('../source/kto_kuda.mp3');
+            sound.play();
+            setTimeout(function(){
+              alert("ТЫ КУДА СОБРАЛСЯ?");
+            }, 1500);
+          }
+          else{
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../includes/delete_user.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            var data = "room_id=<?php echo '$room_id'?>&index=" + button.dataset.id;
+            xhr.send(data);
+          }
         });
       });
     </script>

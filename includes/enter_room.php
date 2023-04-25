@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
   if ($room['room_password'] == $password) {
     session_start();
     $_SESSION['authenticated'] = true;
+    $_SESSION['nickname'] = $nickname;
     $sql = "UPDATE `rooms` SET 
       user4 = CASE 
           WHEN user2 IS NOT NULL AND user3 IS NOT NULL AND user4 IS NULL THEN '$nickname' 

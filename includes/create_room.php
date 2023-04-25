@@ -49,6 +49,7 @@ if (mysqli_num_rows($result) > 0) {
     session_start();
     $_SESSION['authenticated'] = true;
     $_SESSION['user_num'] = 1;
+    $_SESSION['nickname'] = $nickname;
 
     $connection->close();
     exit;
