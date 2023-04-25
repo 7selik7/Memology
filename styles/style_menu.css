@@ -46,11 +46,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.cross {
-  width: 7vh;
-  height: 7vh;
-  padding-top: 0.5vh;
-}
 .room_name {
   color: var(--black);
   font-family: var(--montserrat-40-regular-family);
@@ -95,7 +90,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1.7vh 3.2vh;
+  padding: 0.5vh 3.2vh;
   background-color: var(--white-smoke);
   border-radius: 6.3vh;
   box-shadow: inset rgba(0,0,0,0.1) 0px 0.5vh 1.3vh 0px;
@@ -157,3 +152,25 @@ button:hover {
   font-weight: var(--montserrat-20-semi-bold-weight);
   line-height: var(--montserrat-20-semi-bold-line-height);
 }
+.cross-btn {
+  background-image: url("../images/project_images/cross.svg");
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 7vh;
+  height: 7vh;
+  padding-top: 0.5vh;
+}
+.cross-btn:hover {
+  background-color: rgb(239, 163, 158);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 7vh;
+  height: 7vh;
+  padding-top: 0.5vh;
+}
+

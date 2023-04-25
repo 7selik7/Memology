@@ -44,38 +44,31 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       <div class="users">
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
-          <button class='cross-btn' data-id="0"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
+          <button class='cross-btn' data-id="0"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
-          <button class='cross-btn' data-id="1"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
+          <button class='cross-btn' data-id="1"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
-          <button class='cross-btn' data-id="2"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
+
+          <button class='cross-btn' data-id="2"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for="">
-            </div>
+            <div class="username" for=""></div>
           </div>
-          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
-          <button class='cross-btn' data-id="3"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
+          <button class='cross-btn' data-id="3"></button>
         </div>
       </div>  
         
