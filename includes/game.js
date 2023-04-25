@@ -29,6 +29,14 @@ function updateImages(){
     });
 } 
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 function addSecondsToTime(start_time, secondsToAdd) {
     const cont_time = start_time.split(':'); 
     let hours = parseInt(cont_time[0]);
@@ -141,6 +149,10 @@ function second_stage(){
             const images = JSON.parse(xhr.responseText);
             const imageButtons = document.querySelectorAll('.vote_image');
             const imageIndexes = Object.keys(images).sort((a, b) => a - b); 
+            console.log(imageIndexes);
+            console.log(images);
+            shuffle(imageIndexes);
+            console.log(imageIndexes); 
             for (let i = 0; i < imageIndexes.length; i++) {
                 const index = imageIndexes[i];
                 const image = images[index].toString();

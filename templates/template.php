@@ -47,7 +47,8 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             <div class="username" for="">
             </div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
+          <button class='cross-btn' data-id="0"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
         </div>
 
         <div class="user">
@@ -55,7 +56,8 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             <div class="username" for="">
             </div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
+          <button class='cross-btn' data-id="1"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
         </div>
 
         <div class="user">
@@ -63,7 +65,8 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             <div class="username" for="">
             </div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
+          <button class='cross-btn' data-id="2"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
         </div>
 
         <div class="user">
@@ -71,7 +74,8 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
             <div class="username" for="">
             </div>
           </div>
-          <img alt="cross" class="cross" src="../images/project_images/cross.svg"/>
+          <!-- Вот тут я обернул кнопку и тебе надо исправить это КЛАСС КНОПКИ НЕ МЕНЯТЬ-->
+          <button class='cross-btn' data-id="3"><img alt="cross" class="cross" src="../images/project_images/cross.svg"/></button>
         </div>
       </div>  
         
@@ -97,6 +101,18 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         var data = "game_status=1&room_id=<?php echo '$room_id'?>";
         xhr.send(data);
         window.location.href = '../games/game_$room_id.php';
+      });
+
+      let kickButtons = document.querySelectorAll('.cross-btn');
+      kickButtons.forEach(button => {
+        button.addEventListener('click', event => {
+          console.log(button.dataset.id);
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '../includes/delete_user.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          var data = "room_id=<?php echo '$room_id'?>&index=" + button.dataset.id;
+          xhr.send(data);
+        });
       });
     </script>
   </div>
