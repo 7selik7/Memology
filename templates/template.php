@@ -14,6 +14,8 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
   <title>Document</title>
   <link rel="stylesheet" href="../styles/style_menu.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script>
   $(document).ready(function(){
   setInterval(function(){
@@ -74,7 +76,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         
       <div class="buttons">
         <div class="border">
-          <button>
+          <button id='invite'>
             ЗАПРОСИТИ
           </button>
         </div>
@@ -115,6 +117,22 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
           }
         });
       });
+
+      let inviteButton = document.getElementById('invite');
+      inviteButton.addEventListener('click', function() {
+        let link = 'localhost/Memology';
+        navigator.clipboard.writeText(link);
+        Toastify({
+          text: 'Посилання скопійовано в буфер обміну',
+          style: {
+            background: 'rgba(240, 68, 56, 1)',
+            borderRadius: '3vh' 
+          },
+          duration: 2000,
+          position: 'center',
+        }).showToast();
+      });
+
     </script>
   </div>
 </body>
