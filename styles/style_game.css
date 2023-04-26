@@ -3,9 +3,24 @@
 }
 
 #game_waiting{
-  display: block;
+  height: 100vh;
+  display: flex;
+  background: url("../images/project_images/game_waiting.svg");
+  background-size: cover;
+  background-position: center;
+  margin: 0px;
 }
-
+body {
+  height: 100vh;
+  margin: 0px;
+  justify-content: center;
+  align-items: center;
+  }
+.text{
+  margin-top: 30vh;
+  margin-left: 30vh;
+  height: 18vh;
+}
 #image_block{
   display: none;
 }
