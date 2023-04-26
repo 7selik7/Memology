@@ -46,29 +46,28 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       <div class="users">
         <div class="user">
           <div class="userbg">
-            <div class="username" for=""></div>
+            <div class="username"></div>
           </div>
           <button class='cross-btn' data-id="1"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for=""></div>
+            <div class="username"></div>
           </div>
           <button class='cross-btn' data-id="2"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for=""></div>
+            <div class="username"></div>
           </div>
-
           <button class='cross-btn' data-id="3"></button>
         </div>
 
         <div class="user">
           <div class="userbg">
-            <div class="username" for=""></div>
+            <div class="username"></div>
           </div>
           <button class='cross-btn' data-id="4"></button>
         </div>

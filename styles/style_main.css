@@ -25,9 +25,8 @@
 body {
 height: 100vh;
 margin: 0px;
+background: url("../images/project_images/bg1.svg");
 background-size: cover;
-background: url("../images/project_images/bg1.png");
-background-size: 100% 100%;
 background-position: center;
 display: flex;
 flex-direction: column;
