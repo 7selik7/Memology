@@ -2,6 +2,16 @@
 
 include('../includes/connect_db.php');
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $room_name = isset($_POST['room_name']) ? $_POST['room_name'] : '';
+  $password = isset($_POST['password']) ? $_POST['password'] : '';
+  $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : '';
+
+  if (empty($room_name) || empty($password) || empty($nickname)) {
+    echo 'Заповніть всі поля';
+    exit;
+  }
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $room_name = $_POST['room_name'];
@@ -25,6 +35,7 @@ if ($result->num_rows > 0) {
   if ($room['room_password'] == $password) {
     session_start();
     $_SESSION['authenticated'] = true;
+    $_SESSION['nickname'] = $nickname;
     $sql = "UPDATE `rooms` SET 
       user4 = CASE 
           WHEN user2 IS NOT NULL AND user3 IS NOT NULL AND user4 IS NULL THEN '$nickname' 
@@ -59,17 +70,17 @@ if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc(mysqli_query($connection, $sql));
     $room_id = $row["room_id"];
     $filename = "../games/game_" . $room_id . ".php";
-    header('Location: ' . $filename);
+    echo $filename;
     exit();
 
 
     
   } else {
-      header("Location: ../index.php");
+      echo 'Ви вели не вірний пароль';
       exit();
   }
 } else {
-  header("Location: ../index.php");
+  echo 'Такої кімнати не існує';
   exit();
 }
 

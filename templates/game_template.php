@@ -53,7 +53,11 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
       <div id="timer_block"> <h1 id='timer'></h1> </div>
 
       <div id="final_block"> 
-        <h1>Гру завершено!!!</h1>      
+        <h1>Гру завершено!!!</h1>
+        <div class='rating'></div>
+        <div class='rating'></div>
+        <div class='rating'></div>
+        <div class='rating'></div>    
       </div>
 
   </div>
