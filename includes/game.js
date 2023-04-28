@@ -210,11 +210,12 @@ function final_stage(){
             let points2 = response.points2;
             let points3 = response.points3;
             let points4 = response.points4;
+            console.log(points1, points2, points3, points4);
         }
     };
     xhr.send(data);
-    localStorage.clear();
 
+    localStorage.clear();
     waitBlock.style.display = "none";
     imageBlock.style.display = "none";
     timerBlock.style.display = 'none';
