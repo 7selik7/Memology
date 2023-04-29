@@ -27,7 +27,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
              });
          }
     });
-  }, 2000);
+  }, 1000);
   }); 
 </script>
 </head>
@@ -89,12 +89,31 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
 
     <script>
       document.getElementById('start_game_button').addEventListener('click', function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../includes/update_game_status.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        var data = "game_status=1&room_id=<?php echo '$room_id'?>";
-        xhr.send(data);
-        window.location.href = '../games/game_$room_id.php';
+        var buttons = document.querySelectorAll('.username');
+        var hasText = true;
+        buttons.forEach(function(button) {
+          if (!button.innerText) {
+            hasText = false;
+          }
+        });
+        if (hasText) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '../includes/update_game_status.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          var data = "game_status=1&room_id=<?php echo '$room_id'?>";
+          xhr.send(data);
+          window.location.href = '../games/game_$room_id.php';
+        } else {
+          Toastify({
+          text: "Не всі під`єдналися",
+          style: {
+            background: 'rgba(240, 68, 56, 1)',
+            borderRadius: '3vh' 
+          },
+          duration: 2000,
+          position: 'center',
+        }).showToast();
+        }
       });
 
       let kickButtons = document.querySelectorAll('.cross-btn');

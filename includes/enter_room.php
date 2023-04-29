@@ -33,6 +33,16 @@ if ($result->num_rows > 0) {
 
   // Проверяем совпадение пароля
   if ($room['room_password'] == $password) {
+    $sql = "SELECT `user1`, `user2`, `user3`, `user4` FROM `rooms` WHERE `room_name` = '$room_name'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc($result);
+    if ($row['user1'] !== null && $row['user2'] !== null && $row['user3'] !== null && $row['user4'] !== null) {
+      echo 'Місць немає';
+      exit;
+    }
+    //if (!is_null($_SESSION['user_num'])) {
+    //  echo 'Ви вже зарегістровані';
+    //} 
     session_start();
     $_SESSION['authenticated'] = true;
     $_SESSION['nickname'] = $nickname;
