@@ -50,7 +50,6 @@
     enterForm.addEventListener("submit", submitForm);
 
     function submitForm(event) {
-        console.log('df');
         event.preventDefault(); 
 
         const form = event.target; 

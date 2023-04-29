@@ -1,9 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
+if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSION['role'] !== 'admin') {
     header('Location: ../index.php');
     exit();
-}?>
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +139,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
 
       let inviteButton = document.getElementById('invite');
       inviteButton.addEventListener('click', function() {
-        let link = 'localhost/Memology';
+        let link = 'memology.fun';
         navigator.clipboard.writeText(link);
         Toastify({
           text: 'Посилання скопійовано в буфер обміну',

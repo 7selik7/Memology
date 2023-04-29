@@ -58,6 +58,7 @@ if (mysqli_num_rows($result) > 0) {
     file_put_contents($filename, $content);
     session_start();
     $_SESSION['authenticated'] = true;
+    $_SESSION['role'] = 'admin';
     $_SESSION['user_num'] = 1;
     $_SESSION['nickname'] = $nickname;
 
