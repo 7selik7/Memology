@@ -17,6 +17,10 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
     <title>Document</title>
 </head>
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+</style>
+
 <body>
   <!-- Этот блок высветиться игрокам которые зайдут в комнату и будут ждать пока админ (тот кто создал комнату) запустит игру. Тоесть тут просто 
   можно сделать просто надпись на фоне "ожидайте начало игры, также можно добавить какой интенрактив типо крутящегося колечка например"-->
@@ -25,40 +29,45 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
   </div>
     <!-- Дальше идет блок body этот блок появиться у всех пользователей и у админа в том числе, тоесть тут уже должен быть отрисован сам процес игры--> 
   <div id="main">
-      <div id="image_block">
-          <div id="theme_block"> 
-            <h1 class="theme"></h1>
-          </div>
-          <div class="rows">
-            <button class='image_button'><img src='' width='300' height='180'></button>
-            <button class='image_button'><img src='' width='300' height='180'></button>  
-            <button class='image_button'><img src='' width='300' height='180'></button>    
-          </div>
-          <div class="rows">
-            <button class='image_button'><img src='' width='300' height='180'></button>
-            <button class='image_button'><img src='' width='300' height='180'></button>  
-            <button class='image_button'><img src='' width='300' height='180'></button>  
-          </div>
+    <div id="theme">
+      <div class="frame3">
+        <div id="round_block"><h1 class='round'>1</h1></div>
+        <div class="round_text"></div>
       </div>
-      <div id="result_block">
-          <div id="theme_block"> 
-            <h1 class="theme"></h1>
-          </div>
-          <div class="rows"><!-- свой класс придумай -->
-            <button class='vote_image'><img src='' width='300' height='180'></button>
-            <button class='vote_image'><img src='' width='300' height='180'></button>  
-            <button class='vote_image'><img src='' width='300' height='180'></button>  
-          </div>
+      <div id="theme_block"> 
+          <h1 class="theme"></h1>
       </div>
-      <div id="timer_block"> <h1 id='timer'></h1> </div>
+      <div class="frame2">
+        <div id="timer_block"> <h1 id='timer'></h1></div>
+        <div class="timer_text"></div>
+      </div>
+    </div>
+    <div id="image_block">
+      <div class="memes">
+        <div class="rows">
+          <button class='image_button'><img src='' style='width: 35.5vh; height: auto;'></button>
+          <button class='image_button'><img src='' style='width: 35.5vh; height: auto;'></button>  
+          <button class='image_button'><img src='' style='width: 35.5vh; height: auto;'></button>    
+        </div>
+        <div class="rows">
+          <button class='image_button'><img src='' style='width: 35.5vh; height: auto'></button>
+          <button class='image_button'><img src='' style='width: 35.5vh; height: auto'></button>  
+          <button class='image_button'><img src='' style='width: 35.5vh; height: auto'></button>  
+        </div>
+      </div>
+    </div>
+    <div id="result_block">
+      <div class="vote_text"></div>
+      <div class="rows_vote"><!-- свой класс придумай -->
+        <button class='vote_image'><img src='' style='width: 35.5vh; height: auto;'></button>
+        <button class='vote_image'><img src='' style='width: 35.5vh; height: auto;'></button>  
+        <button class='vote_image'><img src='' style='width: 35.5vh; height: auto;'></button>  
+      </div>
+    </div>
 
-      <div id="final_block"> 
-        <h1>Гру завершено!!!</h1>
-        <div class='rating'></div>
-        <div class='rating'></div>
-        <div class='rating'></div>
-        <div class='rating'></div>    
-      </div>
+    <div id="final_block"> 
+      <div class="game_over"></div>      
+    </div>
 
   </div>
 

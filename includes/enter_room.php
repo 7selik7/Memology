@@ -2,16 +2,6 @@
 
 include('../includes/connect_db.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $room_name = isset($_POST['room_name']) ? $_POST['room_name'] : '';
-  $password = isset($_POST['password']) ? $_POST['password'] : '';
-  $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : '';
-
-  if (empty($room_name) || empty($password) || empty($nickname)) {
-    echo 'Заповніть всі поля';
-    exit;
-  }
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $room_name = $_POST['room_name'];
@@ -33,19 +23,8 @@ if ($result->num_rows > 0) {
 
   // Проверяем совпадение пароля
   if ($room['room_password'] == $password) {
-    $sql = "SELECT `user1`, `user2`, `user3`, `user4` FROM `rooms` WHERE `room_name` = '$room_name'";
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_assoc($result);
-    if ($row['user1'] !== null && $row['user2'] !== null && $row['user3'] !== null && $row['user4'] !== null) {
-      echo 'Місць немає';
-      exit;
-    }
-    //if (!is_null($_SESSION['user_num'])) {
-    //  echo 'Ви вже зарегістровані';
-    //} 
     session_start();
     $_SESSION['authenticated'] = true;
-    $_SESSION['nickname'] = $nickname;
     $sql = "UPDATE `rooms` SET 
       user4 = CASE 
           WHEN user2 IS NOT NULL AND user3 IS NOT NULL AND user4 IS NULL THEN '$nickname' 
@@ -80,17 +59,17 @@ if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc(mysqli_query($connection, $sql));
     $room_id = $row["room_id"];
     $filename = "../games/game_" . $room_id . ".php";
-    echo $filename;
+    header('Location: ' . $filename);
     exit();
 
 
     
   } else {
-      echo 'Ви вели не вірний пароль';
+      header("Location: ../index.php");
       exit();
   }
 } else {
-  echo 'Такої кімнати не існує';
+  header("Location: ../index.php");
   exit();
 }
 

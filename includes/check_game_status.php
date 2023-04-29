@@ -4,13 +4,9 @@ include('../includes/connect_db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $room_id = $_POST['room_id'];
-    session_start();
-    $nickname = $_SESSION['nickname'];
-    $user_num = $_SESSION['user_num'];
-    $user = 'user' . $user_num;
 
     // Выборка значения game_status из таблицы rooms
-    $sql = "SELECT `game_status`, `$user` FROM `rooms` WHERE `room_id`='$room_id'";
+    $sql = "SELECT `game_status` FROM `rooms` WHERE `room_id`='$room_id'";
     $result1 = $connection->query($sql);
     $row1 = $result1->fetch_assoc();
 
@@ -18,17 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result2 = $connection->query($sql);
     $row2 = $result2->fetch_assoc();
 
-    if ($row1['user' . $user_num] == $nickname){
-        $user_status = '1';
-    }
-    else {
-        $user_status = '0';
-    }
-    
+    // Формирование ответа в виде ассоциативного массива
     $response = array(
         'game_status' => $row1['game_status'],
-        'start_time' => $row2['start_time'],
-        'user_status' => $user_status
+        'start_time' => $row2['start_time']
     );
     $json_response = json_encode($response);
 
