@@ -113,16 +113,15 @@ function first_stage(){
     updateImages();
     updateTheme(round);
     waitBlock.style.display = "none";
+    let mainBlock = document.getElementById("main");
+    mainBlock.style.display = "flex";
+    themeBlock.style.display = "flex";
     imageBlock.style.display = "flex";
     timerBlock.style.display = 'flex';
     let saved_img_display_value = localStorage.getItem("image_block_display");
-    //let result_block_display_value = localStorage.getItem("result_block_display");
     if (saved_img_display_value) {
         imageBlock.style.display = saved_img_display_value;
     }
-    /*if (result_block_display_value) {
-        resultBlock.style.display = result_block_display_value;
-    }*/
 
     let timer_func = setInterval(function() {
         let answer = updateTimer(30, start_time);
@@ -132,7 +131,6 @@ function first_stage(){
             imageBlock.style.display = "none";
             localStorage.setItem("image_block_display", imageBlock.style.display);
             resultBlock.style.display = "flex";
-            //localStorage.setItem("result_block_display", resultBlock.style.display);
             
             second_stage();
             return;
@@ -220,13 +218,13 @@ function final_stage(){
     imageBlock.style.display = "none";
     timerBlock.style.display = 'none';
     resultBlock.style.display = 'none';
-
+    themeBlock.style.display = "none";
     finalBlock.style.display = 'flex';
     return;
 }
 
 function check_round(round){
-    if (round > 1){
+    if (round > 3){
         final_stage();
         return false;
     }
@@ -238,7 +236,7 @@ function check_round(round){
 }
 const imageButtons = document.querySelectorAll('.image_button');
 const voteButtons = document.querySelectorAll('.vote_image');
-
+const themeBlock = document.getElementById("theme");
 const imageBlock = document.getElementById('image_block');
 const resultBlock = document.getElementById('result_block');
 const timerBlock = document.getElementById('timer_block');
