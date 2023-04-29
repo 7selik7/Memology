@@ -1,32 +1,269 @@
-#main{
-  display: flex;
+:root {
+  /* Typographies */
+  /* montserrat-40-semibold */
+  --montserrat-40-semibold-family: "Montserrat";
+  --montserrat-40-semibold-size: 5vh;
+  --montserrat-40-semibold-weight: 600;
+  --montserrat-40-semibold-line-height: normal;
+  
+  /* montserrat-25-semibold */
+  --montserrat-25-semibold-family: "Montserrat";
+  --montserrat-25-semibold-size: 3.5vh;
+  --montserrat-25-semibold-weight: 600;
+  --montserrat-25-semibold-line-height: normal;
 }
-
+#main{
+  height: 100vh;
+  display: none;
+  background: url("../images/project_images/game_bg.svg");
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  margin: 0vh;
+}
+.frame4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 7.7vh;
+  margin-left: 40vh;
+}
+#theme_block {
+  background: url("../images/project_images/bg_situation.svg");
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 108vh;
+  height: 17.63vh;
+  padding: 4.6vh 7vh;
+  border-radius: 3.5vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+.theme {
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin: 0vh;
+  margin-right: 0vh;
+  height: 4.5em;
+  color: var(--black);
+  font-family: var(--montserrat-25-semibold-family);
+  font-size: var(--montserrat-25-semibold-size);
+  font-weight: var(--montserrat-25-semibold-weight);
+  line-height: var(--montserrat-25-semibold-line-height);
+  line-height: 150%;
+}
+.rows {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0vh;
+  gap: 5.5vh;
+}
+.rows_vote {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0vh;
+  margin-right: 0.9vh;
+  gap: 5.5vh;
+}
+.memes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0vh;
+  margin-top: 7.7vh;
+  margin-right: 0.9vh;
+  gap: 4.2vh;
+}
+.image_button {
+  justify-content: center;
+  align-items: center;
+  padding: 0vh;
+  border: 0vh solid;
+  border-radius: 3.7vh;
+  background-color: rgba(181, 151, 193, 0);
+}
+img:hover {
+  border: 0.7vh solid rgb(212, 190, 221);
+  border-radius: 3.9vh;
+  margin: 0vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+.vote_image{
+  justify-content: center;
+  align-items: bottom;
+  padding: 0vh;
+  height: 22vh;
+  border: 0vh solid;
+  border-radius: 3.7vh;
+  background-color: rgba(181, 151, 193, 1);
+}
+img {
+  border: 0.7vh solid rgba(181, 151, 193, 1);
+  border-radius: 3.9vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
 #game_waiting{
   height: 100vh;
   display: flex;
   background: url("../images/project_images/game_waiting.svg");
   background-size: cover;
   background-position: center;
-  margin: 0px;
+  margin: 0vh;
 }
 body {
   height: 100vh;
   margin: 0px;
   justify-content: center;
   align-items: center;
-  }
+}
 .text{
   margin-top: 30vh;
   margin-left: 30vh;
   height: 18vh;
+  border: 0vh solid;
+  border-radius: 0vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0);
+}
+.text:hover{
+  border: 0vh solid;
+  border-radius: 0vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0);
+}
+#timer_block{
+  background: url("../images/project_images/number.svg");
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  width: 13vh;
+  height: 13vh;
+  border-radius: 100vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+#timer{
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-family: var(--montserrat-40-semibold-family);
+  font-size: var(--montserrat-40-semibold-size);
+  font-weight: var(--montserrat-40-semibold-weight);
+  line-height: var(--montserrat-40-semibold-line-height);
+}
+.timer_text{
+  background: url("../images/project_images/timer_text.svg");
+  background-size: cover;
+  background-position: top;
+  justify-content: center;
+  align-items: center;
+  width: 23vh;
+  height: 6.05vh;
+  border-radius: 1.5vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+.vote_text{
+  background: url("../images/project_images/voting_text.svg");
+  background-size: cover;
+  background-position: top;
+  justify-content: center;
+  align-items: center;
+  width: 40vh;
+  height: 6.9vh;
+  border-radius: 1.5vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+.game_over{
+  background: url("../images/project_images/game_over.svg");
+  background-size: cover;
+  background-position: top;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40vh;
+  width: 80vh;
+  height: 13.5vh;
+  border-radius: 3vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+  align-self: center
+}
+.frame2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 4vh;
+}
+.frame3{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 4vh;
+}
+#theme {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin-left: 2vh;
+  margin-top: 8vh;
+  gap: 9vh;
+}
+#round_block{
+  background: url("../images/project_images/number.svg");
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  width: 13vh;
+  height: 13vh;
+  border-radius: 100%;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+.round_text{
+  background: url("../images/project_images/round.svg");
+  background-size: cover;
+  background-position: top;
+  justify-content: center;
+  align-items: center;
+  width: 20vh;
+  height: 6.15vh;
+  border-radius: 1.5vh;
+  box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
+}
+.round{
+  align-items: center;
+  justify-content: center;
+  margin-left: 5.5vh;
+  color: var(--black);
+  font-family: var(--montserrat-40-semibold-family);
+  font-size: var(--montserrat-40-semibold-size);
+  font-weight: var(--montserrat-40-semibold-weight);
+  line-height: var(--montserrat-40-semibold-line-height);
 }
 #image_block{
   display: none;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #result_block{
   display: none;
+  margin-left: 1vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5.6vh;
+  margin-top: 9.8vh;
 }
 
 #timer_block{
@@ -35,6 +272,8 @@ body {
 
 #final_block{
   display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .rows{

@@ -2,17 +2,6 @@
 //Подключение к базе данных
 include('../includes/connect_db.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $room_name = isset($_POST['room_name']) ? $_POST['room_name'] : '';
-  $password = isset($_POST['password']) ? $_POST['password'] : '';
-  $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : '';
-
-  if (empty($room_name) || empty($password) || empty($nickname)) {
-    echo 'Заповніть всі поля';
-    exit;
-  }
-}
-
 //Получаем данные с формы после нажати кнопки "создать комнату"
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Получаем значения, отправленные через метод POST
@@ -56,13 +45,13 @@ if (mysqli_num_rows($result) > 0) {
     $content = str_replace('$room_name', $room_name, $content);
     $content = str_replace('$room_id', $room_id, $content);
     file_put_contents($filename, $content);
+    header('Location: ' . $filename);
     session_start();
     $_SESSION['authenticated'] = true;
     $_SESSION['user_num'] = 1;
-    $_SESSION['nickname'] = $nickname;
 
     $connection->close();
-    echo $filename;
+    exit;
 }
 
 ?>

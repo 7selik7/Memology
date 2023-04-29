@@ -1,11 +1,3 @@
-function kick_player(){
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../includes/clear_session.php');
-    xhr.send();
-    localStorage.clear();
-    window.location.href = "../index.php"
-}
-
 function updateTheme(current_round){
     $.ajax({
         url: '../includes/get_theme.php',
@@ -78,34 +70,25 @@ function checkGameStatus() {
         const response = xhr.responseText;
         const responseData = JSON.parse(response);
         const gameStatus = responseData.game_status;
-        const userStatus = responseData.user_status;
         start_time = responseData.start_time;
-        if (userStatus === '0'){
-            kick_player();
-            return;
-        }
-        if (gameStatus === '1') {
-            let now = new Date();
-            let hours = now.getHours().toString().padStart(2, '0');
-            let minutes = now.getMinutes().toString().padStart(2, '0');
-            let seconds = now.getSeconds().toString().padStart(2, '0');
-            let now_time = `${hours}:${minutes}:${seconds}`;
-            let date1 = new Date('1970-01-01T' + start_time + 'Z');
-            let date2 = new Date('1970-01-01T' + now_time + 'Z');
+                if (gameStatus === '1') {
+                    let now = new Date();
+                    let hours = now.getHours().toString().padStart(2, '0');
+                    let minutes = now.getMinutes().toString().padStart(2, '0');
+                    let seconds = now.getSeconds().toString().padStart(2, '0');
+                    let now_time = `${hours}:${minutes}:${seconds}`;
+                    let date1 = new Date('1970-01-01T' + start_time + 'Z');
+                    let date2 = new Date('1970-01-01T' + now_time + 'Z');
             
-            const diff_seconds = (date2.getTime() - date1.getTime()) / 1000;
-            const num_of_50_sec_intervals = Math.floor(diff_seconds / 50);
-            round = num_of_50_sec_intervals;
-            if (round > 1){
-                final_stage();
-                return
-            }
-            start_time = addSecondsToTime(start_time, 50 * round);
+                    const diff_seconds = (date2.getTime() - date1.getTime()) / 1000;
+                    const num_of_50_sec_intervals = Math.floor(diff_seconds / 50);
+                    round = num_of_50_sec_intervals;
+                    start_time = addSecondsToTime(start_time, 50 * round);
 
-            first_stage();
-        } else {
-            setTimeout(checkGameStatus, 1000);
-        }
+                    first_stage();
+                } else {
+                    setTimeout(checkGameStatus, 1000);
+                }
     }};
 }
 
@@ -113,16 +96,19 @@ function first_stage(){
     updateImages();
     updateTheme(round);
     waitBlock.style.display = "none";
+    let mainBlock = document.getElementById("main");
+    mainBlock.style.display = "flex";
+    themeBlock.style.display = "flex";
     imageBlock.style.display = "flex";
     timerBlock.style.display = 'flex';
     let saved_img_display_value = localStorage.getItem("image_block_display");
-    //let result_block_display_value = localStorage.getItem("result_block_display");
+    let result_block_display_value = localStorage.getItem("result_block_display");
     if (saved_img_display_value) {
         imageBlock.style.display = saved_img_display_value;
     }
-    /*if (result_block_display_value) {
+    if (result_block_display_value) {
         resultBlock.style.display = result_block_display_value;
-    }*/
+    }
 
     let timer_func = setInterval(function() {
         let answer = updateTimer(30, start_time);
@@ -132,7 +118,7 @@ function first_stage(){
             imageBlock.style.display = "none";
             localStorage.setItem("image_block_display", imageBlock.style.display);
             resultBlock.style.display = "flex";
-            //localStorage.setItem("result_block_display", resultBlock.style.display);
+            localStorage.setItem("result_block_display", resultBlock.style.display);
             
             second_stage();
             return;
@@ -166,7 +152,10 @@ function second_stage(){
             const images = JSON.parse(xhr.responseText);
             const imageButtons = document.querySelectorAll('.vote_image');
             const imageIndexes = Object.keys(images).sort((a, b) => a - b); 
+            console.log(imageIndexes);
+            console.log(images);
             shuffle(imageIndexes);
+            console.log(imageIndexes); 
             for (let i = 0; i < imageIndexes.length; i++) {
                 const index = imageIndexes[i];
                 const image = images[index].toString();
@@ -192,41 +181,28 @@ function third_stage(){
 
     imageBlock.style.display = "flex";
     localStorage.setItem("image_block_display", imageBlock.style.display);
-    localStorage.setItem("result_block_display", "flex");
     round = round + 1;
     imageBlock.style.display = "flex";
     check_round(round);
 };
 
 function final_stage(){
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../includes/clear_session.php');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    var data = 'room_id=' + encodeURIComponent(room_id);
-    xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            var response = JSON.parse(this.responseText);
-            let points1 = response.points1;
-            let points2 = response.points2;
-            let points3 = response.points3;
-            let points4 = response.points4;
-            console.log(points1, points2, points3, points4);
-        }
-    };
-    xhr.send(data);
-
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '../includes/clear_session.php');
+    xhr.send();
     localStorage.clear();
+
     waitBlock.style.display = "none";
     imageBlock.style.display = "none";
     timerBlock.style.display = 'none';
     resultBlock.style.display = 'none';
-
+    themeBlock.style.display = "none";
     finalBlock.style.display = 'flex';
     return;
 }
 
 function check_round(round){
-    if (round > 1){
+    if (round > 3){
         final_stage();
         return false;
     }
@@ -238,7 +214,7 @@ function check_round(round){
 }
 const imageButtons = document.querySelectorAll('.image_button');
 const voteButtons = document.querySelectorAll('.vote_image');
-
+const themeBlock = document.getElementById("theme");
 const imageBlock = document.getElementById('image_block');
 const resultBlock = document.getElementById('result_block');
 const timerBlock = document.getElementById('timer_block');
