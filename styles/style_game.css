@@ -43,6 +43,7 @@
   border-radius: 3.5vh;
   box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
 }
+
 .theme {
   align-items: center;
   justify-content: center;
@@ -219,6 +220,7 @@ body {
   gap: 9vh;
 }
 #round_block{
+  display: flex;
   background: url("../images/project_images/number.svg");
   background-size: cover;
   background-position: center;
@@ -229,6 +231,7 @@ body {
   border-radius: 100%;
   box-shadow: 0 1vh 1vh 0  rgba(0, 0, 0, 0.2);
 }
+
 .round_text{
   background: url("../images/project_images/round.svg");
   background-size: cover;
@@ -243,7 +246,7 @@ body {
 .round{
   align-items: center;
   justify-content: center;
-  margin-left: 5.5vh;
+  margin-left: 0vh;
   color: var(--black);
   font-family: var(--montserrat-40-semibold-family);
   font-size: var(--montserrat-40-semibold-size);

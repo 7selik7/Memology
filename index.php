@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Memology</title>
     <link rel="stylesheet" href="styles/style_main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -43,6 +43,7 @@
     </div>
 </body>
 <script>
+    localStorage.clear();
     const createForm = document.getElementById("create_form");
     const enterForm = document.getElementById("enter_form");
 

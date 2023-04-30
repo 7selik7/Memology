@@ -40,10 +40,22 @@ if ($result->num_rows > 0) {
       echo 'Місць немає';
       exit;
     }
-    //if (!is_null($_SESSION['user_num'])) {
-    //  echo 'Ви вже зарегістровані';
-    //} 
+
+    //Цей скрипт отримує room_id для того, щоб запустити сторінку гри
+    $sql = "SELECT room_id FROM `rooms` WHERE room_name = '$room_name'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc(mysqli_query($connection, $sql));
+    $room_id = $row["room_id"];
+
     session_start();
+    if (isset($_SESSION['current_room']) && $_SESSION['current_room'] == $room_id){
+      echo 'Ви вже зареєстровані';
+      exit;
+    }
+    if (isset($_SESSION['current_room'])){
+      session_unset();
+    }
+    $_SESSION['current_room'] = $room_id;
     $_SESSION['authenticated'] = true;
     $_SESSION['nickname'] = $nickname;
     $sql = "UPDATE `rooms` SET 
@@ -74,17 +86,10 @@ if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['user_num'] = $row['user_num'];
 
-    //Цей скрипт отримує room_id для того, щоб запустити сторінку гри
-    $sql = "SELECT room_id FROM `rooms` WHERE room_name = '$room_name'";
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_assoc(mysqli_query($connection, $sql));
-    $room_id = $row["room_id"];
     $filename = "../games/game_" . $room_id . ".php";
     echo $filename;
     exit();
 
-
-    
   } else {
       echo 'Ви вели не вірний пароль';
       exit();

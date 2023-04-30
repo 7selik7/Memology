@@ -1,9 +1,13 @@
-function kick_player(){
+function kick_player(kick = false){
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../includes/clear_session.php');
-    xhr.send();
+    xhr.open('POST', '../includes/clear_session.php');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    var data = 'room_id=' + encodeURIComponent(room_id);
+    xhr.send(data);
     localStorage.clear();
-    window.location.href = "../index.php"
+    if (kick) {
+        window.location.href = "../index.php"
+    }
 }
 
 function updateTheme(current_round){
@@ -81,7 +85,7 @@ function checkGameStatus() {
         const userStatus = responseData.user_status;
         start_time = responseData.start_time;
         if (userStatus === '0'){
-            kick_player();
+            kick_player(true);
             return;
         }
         if (gameStatus === '1') {
@@ -101,7 +105,7 @@ function checkGameStatus() {
                 return
             }
             start_time = addSecondsToTime(start_time, 50 * round);
-
+            
             first_stage();
         } else {
             setTimeout(checkGameStatus, 1000);
@@ -110,6 +114,7 @@ function checkGameStatus() {
 }
 
 function first_stage(){
+    $('.round').html(`${round + 1}`);
     updateImages();
     updateTheme(round);
     waitBlock.style.display = "none";
@@ -197,21 +202,22 @@ function third_stage(){
 };
 
 function final_stage(){
+    let points = [];
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../includes/clear_session.php');
+    xhr.open('POST', '../includes/get_points.php');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     var data = 'room_id=' + encodeURIComponent(room_id);
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             var response = JSON.parse(this.responseText);
-            let points1 = response.points1;
-            let points2 = response.points2;
-            let points3 = response.points3;
-            let points4 = response.points4;
-            console.log(points1, points2, points3, points4);
+            points[0] = response.points1;
+            points[1] = response.points2;
+            points[2] = response.points3;
+            points[3] = response.points4;
         }
     };
     xhr.send(data);
+    
 
     localStorage.clear();
     waitBlock.style.display = "none";
@@ -220,18 +226,22 @@ function final_stage(){
     resultBlock.style.display = 'none';
     themeBlock.style.display = "none";
     finalBlock.style.display = 'flex';
+    setTimeout(function() {
+        console.log(points);
+        kick_player();
+      }, 3000);
     return;
 }
 
 function check_round(round){
-    if (round > 3){
+    if (round > 1){
         final_stage();
-        return false;
+        return;
     }
     else {
         start_time = addSecondsToTime(start_time, 20);
         first_stage();
-        return true;
+        return;
     } 
 }
 const imageButtons = document.querySelectorAll('.image_button');
@@ -281,10 +291,7 @@ imageButtons.forEach(button => {
                     localStorage.setItem("image_block_display", imageBlock.style.display);
                 }
             };
-        }
-
-        
-        
+        }     
     });
 });
 

@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSION['role'] !== 'admin') {
-    header('Location: ../index.php');
-    exit();
+if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSION['user_num'] !== 1 || $_SESSION['current_room'] !== '$room_id') {
+  header('Location: ../index.php');
+  exit();
 }
 ?>
 
@@ -12,7 +12,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSI
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Menu</title>
   <link rel="stylesheet" href="../styles/style_menu.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">

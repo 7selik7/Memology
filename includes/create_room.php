@@ -57,9 +57,26 @@ if (mysqli_num_rows($result) > 0) {
     $content = str_replace('$room_id', $room_id, $content);
     file_put_contents($filename, $content);
     session_start();
+    if (isset($_SESSION['current_room'])){
+      if ($_SESSION['user_num'] == 1){
+        $del_room = $_SESSION['current_room'];
+        $file_path = "../rooms/" . $del_room . ".php";
+        unlink($file_path);
+
+        $file_path = "../games/game_" . $del_room . ".php";
+        unlink($file_path);
+
+        $sql = "DELETE FROM games WHERE room_id='$del_room'";
+        mysqli_query($connection, $sql);
+
+        $sql = "DELETE FROM rooms WHERE room_id='$del_room'";
+        mysqli_query($connection, $sql);
+      }
+    }
+    session_unset();
     $_SESSION['authenticated'] = true;
-    $_SESSION['role'] = 'admin';
     $_SESSION['user_num'] = 1;
+    $_SESSION['current_room'] = $room_id;
     $_SESSION['nickname'] = $nickname;
 
     $connection->close();

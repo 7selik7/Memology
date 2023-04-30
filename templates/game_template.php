@@ -1,7 +1,7 @@
 <!-- Наступний скрипт перевіряє чи ввів користувач пароль чи просто вів адресу -->
 <?php
 session_start();
-if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
+if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSION['current_room'] !== '$room_id') {
     header('Location: ../index.php');
     exit();
 }?>
@@ -14,7 +14,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style_game.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Document</title>
+    <title>Game</title>
 </head>
 
 <style>
@@ -31,7 +31,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
   <div id="main">
     <div id="theme">
       <div class="frame3">
-        <div id="round_block"><h1 class='round'>1</h1></div>
+        <div id="round_block"><h1 class='round'>?</h1></div>
         <div class="round_text"></div>
       </div>
       <div id="theme_block"> 
