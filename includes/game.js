@@ -202,7 +202,7 @@ function third_stage(){
 };
 
 function final_stage(){
-    let points = [];
+    let points;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../includes/get_points.php');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -210,31 +210,97 @@ function final_stage(){
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             var response = JSON.parse(this.responseText);
-            points[0] = response.points1;
-            points[1] = response.points2;
-            points[2] = response.points3;
-            points[3] = response.points4;
+            points = response;
         }
     };
     xhr.send(data);
     
-
     localStorage.clear();
+
     waitBlock.style.display = "none";
     imageBlock.style.display = "none";
     timerBlock.style.display = 'none';
     resultBlock.style.display = 'none';
     themeBlock.style.display = "none";
-    finalBlock.style.display = 'flex';
+
+    preFinalBlock.style.display = 'flex';
     setTimeout(function() {
+        preFinalBlock.style.display = 'none';
+
         console.log(points);
+        let pointsArr = Object.entries(points);
+        pointsArr.sort((a, b) => b[1] - a[1]);
+        for (let i = 0; i < pointsArr.length; i++) {
+            pointsArr[i][1] = parseInt(pointsArr[i][1]);
+        }
+        let place = 0;
+        let lastScore = null;
+        pointsArr.forEach((player, index) => {
+            if (player[1] !== lastScore) {
+                place = index + 1;
+            }
+
+            lastScore = player[1];
+            player.push(place);
+        });
+        let places = document.getElementById('places');
+
+        for (let i = 0; i < pointsArr.length; i++) {
+        let place = document.createElement('div');
+        let rank = document.createElement('div');
+        let num = document.createElement('div');
+        let player_bg = document.createElement('div');
+        let player = document.createElement('div');
+        let points = document.createElement('div');
+        let point = document.createElement('div');
+
+        if (pointsArr[i][2] == 1) {
+            rank.classList.add('gold');
+            player_bg.classList.add('gold_bg');
+        } else if (pointsArr[i][2] == 2) {
+            rank.classList.add('silver');
+            player_bg.classList.add('silver_bg');
+        } else if (pointsArr[i][2] == 3) {
+            rank.classList.add('bronze');
+            player_bg.classList.add('bronze_bg');
+        } else {
+            rank.classList.add('default');
+            player_bg.classList.add('default_bg');
+        }
+        num.classList.add('num');
+        place.classList.add('place');
+        player.classList.add('username');
+        points.classList.add('points_bg');
+        point.classList.add('point');
+
+        player.textContent = pointsArr[i][0];
+        point.textContent = pointsArr[i][1];
+        num.textContent = pointsArr[i][2];
+
+        rank.appendChild(num);
+        place.appendChild(rank);
+
+        player_bg.appendChild(player);
+        place.appendChild(player_bg);
+
+        points.appendChild(point);
+        place.appendChild(points);
+
+        places.appendChild(place);
+        }
+        console.log(pointsArr);
+        finalBlock.style.display = 'flex';
+    }, 3000);
+    
+
+    setTimeout(function() {
         kick_player();
-      }, 3000);
+    }, 3000);
     return;
 }
 
 function check_round(round){
-    if (round > 1){
+    if (round >= 1){
         final_stage();
         return;
     }
@@ -251,7 +317,9 @@ const imageBlock = document.getElementById('image_block');
 const resultBlock = document.getElementById('result_block');
 const timerBlock = document.getElementById('timer_block');
 const waitBlock = document.getElementById('game_waiting');
+const preFinalBlock = document.getElementById('pre_final_block');
 const finalBlock = document.getElementById('final_block');
+
 const timer = document.getElementById("timer");
 
 imageButtons.forEach(button => {

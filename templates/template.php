@@ -15,6 +15,7 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSI
   <title>Menu</title>
   <link rel="stylesheet" href="../styles/style_menu.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="icon" type="image/png" href="../images/project_images/icon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script>

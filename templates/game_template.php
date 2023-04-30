@@ -13,12 +13,13 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSI
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style_game.css">
+    <link rel="icon" type="image/png" href="../images/project_images/icon.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Game</title>
 </head>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 </style>
 
 <body>
@@ -65,11 +66,19 @@ if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated'] || $_SESSI
       </div>
     </div>
 
-    <div id="final_block"> 
+    <div id="pre_final_block"> 
       <div class="game_over"></div>      
     </div>
 
-  </div>
+    <div id="final_block">
+      <img class="cup" src="../images/project_images/cup.svg"/>
+      <div class="results_bg">
+        <img class="results_text" src="../images/project_images/results_text.svg"/>
+          <div id="places">
+          </div>
+        </div>
+    </div>
+</div>
 
 <script>
   let start_time = '';
